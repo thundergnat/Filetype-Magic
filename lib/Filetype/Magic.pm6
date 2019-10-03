@@ -139,22 +139,22 @@ Source Code on GitHub |  https://github.com/file/file
 There is a series of flags which control the behavior of the search:
 
 =begin table
-Flag                    |  hex value | meaning
+Flag                     |  hex value  |  meaning
 ========================================================================
-MAGIC_NONE              |  0x000000,  |  No flags
-MAGIC_DEBUG             |  0x000001,  |  Turn on debugging
-MAGIC_COMPRESS          |  0x000004,  |  Check inside compressed files
-MAGIC_DEVICES           |  0x000008,  |  Look at the contents of devices
-MAGIC_MIME_TYPE         |  0x000010,  |  Return the MIME type
-MAGIC_SYMLINK           |  0x000002,  |   Follow symlinks
-MAGIC_CONTINUE          |  0x000020,  |  Return all matches
-MAGIC_CHECK             |  0x000040,  |  Print warnings to stderr
-MAGIC_PRESERVE_ATIME    |  0x000080,  |  Restore access time on exit
-MAGIC_RAW               |  0x000100,  |  Don't translate unprintable chars
-MAGIC_ERROR             |  0x000200,  |  Handle ENOENT etc as real errors
-MAGIC_MIME_ENCODING     |  0x000400,  |  Return the MIME encoding
-MAGIC_MIME              |  0x000410,  |  (MAGIC_MIME_TYPE|MAGIC_MIME_ENCODING)
-MAGIC_APPLE             |  0x000800,  |  Return the Apple creator and type
+MAGIC_NONE               |  0x000000,  |  No flags
+MAGIC_DEBUG              |  0x000001,  |  Turn on debugging
+MAGIC_COMPRESS           |  0x000004,  |  Check inside compressed files
+MAGIC_DEVICES            |  0x000008,  |  Look at the contents of devices
+MAGIC_MIME_TYPE          |  0x000010,  |  Return the MIME type
+MAGIC_SYMLINK            |  0x000002,  |   Follow symlinks
+MAGIC_CONTINUE           |  0x000020,  |  Return all matches
+MAGIC_CHECK              |  0x000040,  |  Print warnings to stderr
+MAGIC_PRESERVE_ATIME     |  0x000080,  |  Restore access time on exit
+MAGIC_RAW                |  0x000100,  |  Don't translate unprintable chars
+MAGIC_ERROR              |  0x000200,  |  Handle ENOENT etc as real errors
+MAGIC_MIME_ENCODING      |  0x000400,  |  Return the MIME encoding
+MAGIC_MIME               |  0x000410,  |  (MAGIC_MIME_TYPE|MAGIC_MIME_ENCODING)
+MAGIC_APPLE              |  0x000800,  |  Return the Apple creator and type
 MAGIC_NO_CHECK_COMPRESS  |  0x001000,  |  Don't check for compressed files
 MAGIC_NO_CHECK_TAR       |  0x002000,  |  Don't check for tar files
 MAGIC_NO_CHECK_SOFT      |  0x004000,  |  Don't check magic entries
@@ -193,7 +193,7 @@ Return the current version. First digit is major version number, rest are minor.
 --
 
 There are several semi-private methods which mostly deal with initialization and
-setup. There is nothing preventing you from accesing them, they are publically
+setup. There is nothing preventing you from accessing them, they are publically
 available, but most people won't ever need to use them.
 
 =begin code
@@ -201,7 +201,6 @@ method magic-database( str $magic-database, int32 $flags )
 =end code
 Location of the magic database file, pass Nil for default database. Pass any
 flags C<or>ed together to adjust behavior.
-
 
 =begin code
 method magic-init(int32 $flags = 0)
@@ -223,7 +222,7 @@ Pass any errors back up to the calling code.
 --
 
 A few methods dealing with generating, checking and compiling magic database
-files  have yet to be implemented.
+files have yet to be implemented.
 
 
 =head1 AUTHOR

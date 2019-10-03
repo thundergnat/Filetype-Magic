@@ -59,7 +59,7 @@ Return the current version. First digit is major version number, rest are minor.
 
 --
 
-There are several semi-private methods which mostly deal with initialization and setup. There is nothing preventing you from accesing them, they are publically available, but most people won't ever need to use them.
+There are several semi-private methods which mostly deal with initialization and setup. There is nothing preventing you from accessing them, they are publically available, but most people won't ever need to use them.
 
     method magic-database( str $magic-database, int32 $flags )
 

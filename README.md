@@ -69,6 +69,12 @@ E.G. `$magic-instance.set-flags( MAGIC_SYMLINK +| MAGIC_MIME )`.
 
 --
 
+    method get-flags( )
+
+Query which flags are set, returns the int32 value of the set flags.
+
+--
+
     method type( Str $filename )
        or
     method type( IO::Handle $handle )

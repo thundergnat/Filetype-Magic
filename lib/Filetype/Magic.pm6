@@ -47,14 +47,14 @@ class Magic is export {
         magic_getpath($magicfile, $flags);
     }
 
-    # Initialize the file-magic instance, allocate a dtat structure to hold
+    # Initialize the file-magic instance, allocate a data structure to hold
     # information and return a pointer to it.
     method magic-init (int32 $flags = 0) {
         sub magic_open(int32 $flags) returns Pointer is native('magic') { * }
         magic_open($flags) or self.magic-error;
     }
 
-    # Load the database file into a data structure, return o on succes, -1 on failure
+    # Load the database file into a data structure, return 0 on succes, -1 on failure
     method magic-load (Pointer $ms, str $magicfile) {
         sub magic_load(Pointer $ms, str $magicfile) returns int32 is native('magic') { * }
         magic_load($ms, $magicfile);
@@ -204,19 +204,19 @@ flags C<or>ed together to adjust behavior.
 
 
 =begin code
-method magic-init (int32 $flags = 0)
+method magic-init(int32 $flags = 0)
 =end code
 Initialize the file-magic instance, allocate a data structure to hold
 information and return a pointer to it. Pointer is stored in the class as
 $!magic-cookie.
 
 =begin code
-method magic-load (Pointer $magic-struct, str $magicfile)
+method magic-load(Pointer $magic-struct, str $magicfile)
 =end code
 Load the database file into the data structure.
 
 =begin code
-method magic-error ()
+method magic-error()
 =end code
 Pass any errors back up to the calling code.
 

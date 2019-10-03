@@ -65,15 +65,15 @@ There are several semi-private methods which mostly deal with initialization and
 
 Location of the magic database file, pass Nil for default database. Pass any flags `or`ed together to adjust behavior.
 
-    method magic-init (int32 $flags = 0)
+    method magic-init(int32 $flags = 0)
 
 Initialize the file-magic instance, allocate a data structure to hold information and return a pointer to it. Pointer is stored in the class as $!magic-cookie.
 
-    method magic-load (Pointer $magic-struct, str $magicfile)
+    method magic-load(Pointer $magic-struct, str $magicfile)
 
 Load the database file into the data structure.
 
-    method magic-error ()
+    method magic-error()
 
 Pass any errors back up to the calling code.
 

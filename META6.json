@@ -1,7 +1,7 @@
 {
     "perl"          : "6",
     "name"          : "Filetype::Magic",
-    "version"       : "0.0.1",
+    "version"       : "0.0.2",
     "description"   : "guess file type using the libmagic heuristic library",
     "authors"       : [ "Steve Schulze (thundergnat)" ],
     "provides"      : { "Filetype::Magic" : "lib/Filetype/Magic.pm6" },

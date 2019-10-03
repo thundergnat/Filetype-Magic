@@ -1,7 +1,7 @@
 use Test;
 use Filetype::Magic;
 
-plan 13;
+plan 15;
 
 my $magic = Magic.new();
 
@@ -33,7 +33,7 @@ for
   'camelia.ico', 'MS Windows icon resource - 1 icon, 32x32, 32 bits/pixel',
   'camelia.png', 'PNG image data, 32 x 32, 8-bit/color RGBA, non-interlaced'
   -> $file, $text {
-      is($magic.type( "$dir/examples/$file" ), $text, "Detects type: $text");
+      is($magic.type( "$dir/test-files/$file" ), $text, "Detects type: $text");
 }
 
 $magic.set-flags(MAGIC_MIME_TYPE);
@@ -44,7 +44,13 @@ for
   'camelia.ico', 'image/x-icon',
   'camelia.png', 'image/png'
   -> $file, $text {
-      is($magic.type( "$dir/examples/$file" ), $text, "Detects MIME type: $text");
+      is($magic.type( "$dir/test-files/$file" ), $text, "Detects MIME type: $text");
 }
+
+is( $magic.get-flags, 16, 'Gets set flags correctly');
+
+$magic.set-flags(MAGIC_MIME_TYPE +| MAGIC_MIME_ENCODING);
+
+is( $magic.get-flags, 1040, 'Gets multiple set flags correctly');
 
 done-testing;

@@ -46,7 +46,7 @@ There is a series of flags which control the behavior of the search:
 </tbody>
 </table>
 
-The flags may be set during construction by passing a :flag(WHATEVER) value in to the `.new( )` method, or may be adjusted later using the `.set-flags( )` method.
+The flags may be set during construction by passing a :flags(WHATEVER) value in to the `.new( )` method, or may be adjusted later using the `.set-flags( )` method.
 
 METHODS
 -------

@@ -178,7 +178,7 @@ MAGIC_NO_CHECK_TOKENS    |  0x100000,  |  Don't check tokens
 MAGIC_NO_CHECK_ENCODING  |  0x200000,  |  Don't check text encodings
 =end table
 
-The flags may be set during construction by passing a :flag(WHATEVER) value in
+The flags may be set during construction by passing a :flags(WHATEVER) value in
 to the C<.new( )> method, or may be adjusted later using the C<.set-flags( )>
 method.
 

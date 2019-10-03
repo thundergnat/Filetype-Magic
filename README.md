@@ -10,7 +10,7 @@ SYNOPSIS
 
          my $magic = Magic.new;
 
-         say $magic.typr: '/path/to/file.name';
+         say $magic.type: '/path/to/file.name';
 
 DESCRIPTION
 ===========
@@ -76,6 +76,10 @@ Load the database file into the data structure.
     method magic-error ()
 
 Pass any errors back up to the calling code.
+
+--
+
+A few methods dealing with generating, checking and compiling magic database files have yet to be implemented.
 
 AUTHOR
 ======

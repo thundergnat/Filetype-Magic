@@ -51,6 +51,16 @@ The flags may be set during construction by passing a :flags(WHATEVER) value in 
 METHODS
 -------
 
+    method new  # Default database, default flags(none)
+       or
+    method new( :magicfile( '/path/to/magic/database.file' ) ) # Load a custom database
+       or
+    method new( :flags( MAGIC_SYMLINK +| MAGIC_MIME ) ) # Adjust search/reporting behavior
+
+Construct a new `Magic` instance with passed parameters if desired.
+
+--
+
     method set-flags( int32 $flags = 0 )
 
 Allows modification of parameters after initialization. Numeric-bitwise `or` any parameters together.

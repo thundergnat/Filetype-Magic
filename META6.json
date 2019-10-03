@@ -1,0 +1,15 @@
+{
+    "perl"          : "6",
+    "name"          : "Filetype::Magic",
+    "version"       : "0.0.1",
+    "description"   : "guess file type using the libmagic heuristic library",
+    "authors"       : [ "Steve Schulze (thundergnat)" ],
+    "provides"      : { "Filetype::Magic" : "lib/Filetype/Magic.pm6" },
+    "depends"       : [ ],
+    "build-depends" : [ ],
+    "test-depends"  : [ "Test" ],
+    "source-type"   : "git",
+    "source-url"    : "git://github.com/thundergnat/Filetype-Magic.git",
+    "license"       : "Artistic-2.0",
+    "tags"          : [ "file", "file type", "filetype", "magic" ]
+}

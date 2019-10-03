@@ -1,5 +1,5 @@
 use v6;
-unit module Filetype::Magic:ver<0.0.1>:auth<github:thundergnat>;
+unit module Filetype::Magic:ver<0.0.2>:auth<github:thundergnat>;
 
 use NativeCall;
 
@@ -69,6 +69,12 @@ class Magic is export {
     method set-flags ( int32 $flags = 0 ) {
         sub magic_setflags(Pointer $ms, int32 $flags) returns int32 is native('magic') { * }
         magic_setflags($!magic-cookie, $flags) or self.magic-error;
+    }
+
+    # Query which flags are set, returns the int32 value of the set flags.
+    method get-flags ( ) {
+        sub magic_getflags(Pointer $ms) returns int32 is native('magic') { * }
+        magic_getflags($!magic-cookie);
     }
 
     # Try to detect file type given a file path/name
@@ -202,6 +208,13 @@ Allows modification of parameters after initialization. Numeric-bitwise C<or>
 any parameters together.
 
 E.G. C<$magic-instance.set-flags( MAGIC_SYMLINK +| MAGIC_MIME )>.
+
+--
+
+=begin code
+method get-flags( )
+=end code
+Query which flags are set, returns the int32 value of the set flags.
 
 --
 

@@ -107,9 +107,11 @@ class Magic is export {
 =head1 NAME
 Filetype::Magic
 
-Try to guess a files type using the libmagic heuristic library.
+[![Build Status](https://travis-ci.org/thundergnat/Filetype-Magic.svg?branch=master)](https://travis-ci.org/thundergnat/Filetype-Magic)
 
 =head1 SYNOPSIS
+
+Try to guess a files type using the libmagic heuristic library.
 
 =begin code
      use Filetype::Magic;
@@ -296,7 +298,7 @@ This package is free software and is provided "as is" without express or implied
 warranty.  You can redistribute it and/or modify it under the same terms as Perl
 itself.
 
-libmagic library and file utility v5.x author: Ian Darwin, et al.
+libmagic library and file utility v5.x author: Ian Darwin, Christos Zoulas, et al.
 
 
 =head1 LICENSE

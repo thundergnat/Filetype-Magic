@@ -1,6 +1,8 @@
 os:
   - linux
   - osx
+before_install:
+  - sudo apt-get -y install libmagic-dev
 language: perl6
 perl6:
   - latest

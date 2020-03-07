@@ -1,8 +1,6 @@
 use Test;
 use Filetype::Magic;
 
-plan 15;
-
 my $magic = Magic.new();
 
 isa-ok( $magic, 'Filetype::Magic::Magic', 'Can create instance' );
@@ -47,10 +45,14 @@ for
       is($magic.type( "$dir/test-files/$file" ), $text, "Detects MIME type: $text");
 }
 
-is( $magic.get-flags, 16, 'Gets set flags correctly');
+if $magic.version >= 532 { # Only available in 5.32 or later
 
-$magic.set-flags(MAGIC_MIME_TYPE +| MAGIC_MIME_ENCODING);
+    is( $magic.get-flags, 16, 'Gets set flags correctly');
 
-is( $magic.get-flags, 1040, 'Gets multiple set flags correctly');
+    $magic.set-flags(MAGIC_MIME_TYPE +| MAGIC_MIME_ENCODING);
+
+    is( $magic.get-flags, 1040, 'Gets multiple set flags correctly');
+
+}
 
 done-testing;

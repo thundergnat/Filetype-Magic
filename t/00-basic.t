@@ -9,8 +9,8 @@ isa-ok( $magic, 'Filetype::Magic::Magic', 'Can create instance' );
 
 isa-ok( $magic.version, 'Int', 'Version returns a sane value' );
 
-is( $magic.type( Buf.new: "#!/usr/bin/perl\nprint 'Hi';".encode('UTF8') ),
-   'Perl script text executable',
+is( lc($magic.type( Buf.new: "#!/usr/bin/perl\nprint 'Hi';".encode('UTF8') ) ~~ m:i/'Perl script'/),
+   'perl script',
    'Detects a perl string buffer ok'
 );
 
@@ -28,12 +28,12 @@ $fh.close;
 my $dir = $*PROGRAM-NAME.IO.dirname;
 
 for
-  'camelia.zip', 'Zip archive data, at least v1.0 to extract',
-  'camelia.svg', 'SVG Scalable Vector Graphics image',
-  'camelia.ico', 'MS Windows icon resource - 1 icon, 32x32, 32 bits/pixel',
-  'camelia.png', 'PNG image data, 32 x 32, 8-bit/color RGBA, non-interlaced'
+  'camelia.zip', 'zip archive data',
+  'camelia.svg', 'svg scalable vector graphics',
+  'camelia.ico', 'ms windows icon',
+  'camelia.png', 'png image'
   -> $file, $text {
-      is($magic.type( "$dir/test-files/$file" ), $text, "Detects type: $text");
+      is-deeply( lc($magic.type( "$dir/test-files/$file" )).contains($text), True, "Detects type: $text");
 }
 
 $magic.set-flags(MAGIC_MIME_TYPE);

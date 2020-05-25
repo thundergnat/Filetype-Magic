@@ -55,13 +55,18 @@ $magic.set-flags(MAGIC_MIME_TYPE);
 for
   'camelia.zip', 'application/zip',
   'camelia.svg', 'image/svg+xml',
-  'camelia.ico', 'image/vnd.microsoft.icon',
   'camelia.png', 'image/png'
   -> $file, $text {
       is($magic.type( "$dir/test-files/$file" ), $text, "Detects MIME type: $text");
       is($magic.type( "$dir/test-files/$file".IO ), $text, "Detects MIME type: $text");
       is(file-type( "$dir/test-files/$file".IO, :mime ), $text, "Detects MIME type: $text");
 }
+
+my $file = 'camelia.ico';
+my $desc = / 'image/' ( 'x-' | 'vnd.microsoft.' ) 'icon' /;
+like($magic.type( "$dir/test-files/$file" ), $desc, "Detects MIME type: {$desc.perl}");
+like($magic.type( "$dir/test-files/$file".IO ), $desc, "Detects MIME type: {$desc.perl}");
+like(file-type( "$dir/test-files/$file".IO, :mime ), $desc, "Detects MIME type: {$desc.perl}");
 
 if $magic.version >= v5.32 { # Only available in 5.32 or later
 

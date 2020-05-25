@@ -116,7 +116,7 @@ sub default-instance(Int $flags = 0) {
 
 }
 
-multi sub file-type( \a, :$mime = False ) is export {
+sub file-type( \a, :$mime = False ) is export {
     default-instance($mime ?? MAGIC_MIME_TYPE !! 0).type(a)
 }
 

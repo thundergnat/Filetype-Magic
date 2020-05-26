@@ -1,0 +1,11 @@
+0.0.1 - Initial version
+
+0.0.2 - Expand functionality
+        Lots of documentation updates and fixes
+        Expand testing
+
+0.0.3 - Set up Travis-CI, lots of minor changes to ficilitate automated testing.
+
+0.0.4 - Merge in pull request from gmoshkin. Adds subroutine interface. Expanded testing for new routines.
+        Update and expand Docs
+

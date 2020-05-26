@@ -8,16 +8,26 @@ SYNOPSIS
 
 Try to guess a files type using the libmagic heuristic library.
 
+Object oriented mode:
+
          use Filetype::Magic;
 
          my $magic = Magic.new;
 
          say $magic.type: '/path/to/file.name';
 
+Or use a convenience function.
+
+Subroutine interface:
+
+         use Filetype::Magic;
+
+         say file-type '/path/to/file.name';
+
 DESCRIPTION
 ===========
 
-Provides a Perl 6 interface to the libmagic shared library used by the 'file' utility to guess file types, installed by default on most BSDs and Linuxs. Libraries available for OSX and Windows as well.
+Provides a Raku interface to the libmagic shared library used by the 'file' utility to guess file types, installed by default on most BSDs and Linuxs. Libraries available for OSX and Windows as well.
 
 Linux / BSD / OSX: Needs to have the shared library: libmagic-dev installed. May install the shared library directly or install the file-dev packages which will include the shared libmagic library file. Needs the header files so will need the dev packages even if you already have libmagic installed.
 
@@ -50,8 +60,27 @@ There is a series of flags which control the behavior of the search:
 
 The flags may be set during construction by passing a :flags(WHATEVER) value in to the `.new( )` method, or may be adjusted later using the `.set-flags( )` method.
 
-METHODS
--------
+FUNCTIONS - subroutine interface
+--------------------------------
+
+Useful for one-and-done, one-off use.
+
+    sub file-type( IO::Path $path, Bool :$mime )
+       or
+    sub file-type( Str $filename, Bool :$mime )
+       or
+    sub file-type( IO::Handle $handle, Bool :$mime )
+       or
+    sub file-type( Buf $buffer, Bool :$mime )
+
+Try to detect file type of a given file path/name, or open file handle, or string buffer. Strings must be in a specific encoding for the C library, so to avoid encoding issues and to differentiate string buffers from string filenames, you must pass strings as a Buf encoded appropriately. Pass a keyword parameter `mime` to get a mime type result.
+
+--
+
+METHODS - object interface
+--------------------------
+
+For when you would like a persistent instance.
 
     method new  # Default database, default flags(none)
        or
@@ -77,6 +106,8 @@ Query which flags are set, returns the int32 value of the set flags.
 
 --
 
+    method type( IO::Path $path )
+       or
     method type( Str $filename )
        or
     method type( IO::Handle $handle )
@@ -133,6 +164,10 @@ AUTHOR
 This package is free software and is provided "as is" without express or implied warranty. You can redistribute it and/or modify it under the same terms as Perl itself.
 
 libmagic library and file utility v5.x author: Ian Darwin, Christos Zoulas, et al.
+
+#### CONTRIBUTORS
+
+github: gmoshkin
 
 LICENSE
 =======

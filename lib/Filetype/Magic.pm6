@@ -1,5 +1,5 @@
 use v6;
-unit module Filetype::Magic:ver<0.0.3>:auth<github:thundergnat>;
+unit module Filetype::Magic:ver<0.0.4>:auth<github:thundergnat>;
 
 use NativeCall;
 
@@ -130,6 +130,8 @@ Filetype::Magic
 
 Try to guess a files type using the libmagic heuristic library.
 
+Object oriented mode:
+
 =begin code
      use Filetype::Magic;
 
@@ -138,7 +140,9 @@ Try to guess a files type using the libmagic heuristic library.
      say $magic.type: '/path/to/file.name';
 =end code
 
-Or use a convinience function.
+Or use a convenience function.
+
+Subroutine interface:
 
 =begin code
      use Filetype::Magic;
@@ -148,7 +152,7 @@ Or use a convinience function.
 
 =head1 DESCRIPTION
 
-Provides a Perl 6 interface to the libmagic shared library used by the 'file'
+Provides a Raku interface to the libmagic shared library used by the 'file'
 utility to guess file types, installed by default on most BSDs and Linuxs.
 Libraries available for OSX and Windows as well.
 
@@ -215,7 +219,9 @@ The flags may be set during construction by passing a :flags(WHATEVER) value in
 to the C<.new( )> method, or may be adjusted later using the C<.set-flags( )>
 method.
 
-=head2 FUNCTIONS
+=head2 FUNCTIONS - subroutine interface
+
+Useful for one-and-done, one-off use.
 
 =begin code
 sub file-type( IO::Path $path, Bool :$mime )
@@ -234,7 +240,9 @@ you must pass strings as a Buf encoded appropriately. Pass a keyword parameter
 
 --
 
-=head2 METHODS
+=head2 METHODS - object interface
+
+For when you would like a persistent instance.
 
 =begin code
 method new  # Default database, default flags(none)
@@ -345,6 +353,10 @@ warranty.  You can redistribute it and/or modify it under the same terms as Perl
 itself.
 
 libmagic library and file utility v5.x author: Ian Darwin, Christos Zoulas, et al.
+
+=head4 CONTRIBUTORS
+
+github: gmoshkin
 
 
 =head1 LICENSE

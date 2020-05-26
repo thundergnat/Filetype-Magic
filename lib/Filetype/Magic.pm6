@@ -78,6 +78,12 @@ class Magic is export {
     }
 
     # Try to detect file type given a file path/name
+    multi method type ( IO::Path $path ) {
+        sub magic_file(Pointer $ms, str $fn ) returns Str is native('magic') { * }
+        magic_file($!magic-cookie, $path.Str);
+    }
+
+    # Try to detect file type given a file path/name
     multi method type ( Str $filename ) {
         sub magic_file(Pointer $ms, str $fn ) returns Str is native('magic') { * }
         magic_file($!magic-cookie, $filename);
@@ -96,11 +102,22 @@ class Magic is export {
         magic_buffer($!magic-cookie, $buf.decode('UTF8'), $buf.elems);
     }
 
-    # Return the current version. First digit is major version number, rest are minor
+    # Return the current version.
     method version() {
         sub magic_version() returns int32 is native('magic') { * }
-        magic_version()
+        magic_version() ~~ /(\d) (\d+)/;
+        Version.new([$0, $1])
     }
+}
+
+sub default-instance(Int $flags = 0) {
+    state %m;
+    %m{$flags} //= Magic.new(:$flags)
+
+}
+
+sub file-type( \a, :$mime = False ) is export {
+    default-instance($mime ?? MAGIC_MIME_TYPE !! 0).type(a)
 }
 
 =begin pod
@@ -119,6 +136,14 @@ Try to guess a files type using the libmagic heuristic library.
      my $magic = Magic.new;
 
      say $magic.type: '/path/to/file.name';
+=end code
+
+Or use a convinience function.
+
+=begin code
+     use Filetype::Magic;
+
+     say file-type '/path/to/file.name';
 =end code
 
 =head1 DESCRIPTION
@@ -190,6 +215,25 @@ The flags may be set during construction by passing a :flags(WHATEVER) value in
 to the C<.new( )> method, or may be adjusted later using the C<.set-flags( )>
 method.
 
+=head2 FUNCTIONS
+
+=begin code
+sub file-type( IO::Path $path, Bool :$mime )
+   or
+sub file-type( Str $filename, Bool :$mime )
+   or
+sub file-type( IO::Handle $handle, Bool :$mime )
+   or
+sub file-type( Buf $buffer, Bool :$mime )
+=end code
+Try to detect file type of a given file path/name, or open file handle, or
+string buffer. Strings must be in a specific encoding for the C library, so to
+avoid encoding issues and to differentiate string buffers from string filenames,
+you must pass strings as a Buf encoded appropriately. Pass a keyword parameter
+`mime` to get a mime type result.
+
+--
+
 =head2 METHODS
 
 =begin code
@@ -221,6 +265,8 @@ Query which flags are set, returns the int32 value of the set flags.
 --
 
 =begin code
+method type( IO::Path $path )
+   or
 method type( Str $filename )
    or
 method type( IO::Handle $handle )

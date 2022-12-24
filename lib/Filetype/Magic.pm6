@@ -178,9 +178,9 @@ Fedora                 |  [sudo] dnf install libmagic-dev
 OSX                    |  [sudo] brew install libmagic
 OpenSUSE               |  [sudo] zypper install libmagic-dev
 Red Hat                |  [sudo] yum install file-devel
-Source Code on GitHub  |  L<https://github.com/file/file>
-Windows 32bit (older)  |  L<http://gnuwin32.sourceforge.net/packages/file.htm>
-Windows 64bit (newer)  |  L<https://github.com/nscaife/file-windows>
+Source Code on GitHub  |  https://github.com/file/file
+Windows 32bit (older)  |  http://gnuwin32.sourceforge.net/packages/file.htm
+Windows 64bit (newer)  |  https://github.com/nscaife/file-windows
 =end table
 
 ----

@@ -42,7 +42,7 @@ Windows: Needs libmagic.dll. Older 32bit packages are available on the authors s
 <th>Platform</th> <th>Install Method</th>
 </tr></thead>
 <tbody>
-<tr> <td>Debian derivatives</td> <td>[sudo] apt-get install libmagic-dev</td> </tr> <tr> <td>FreeBSD</td> <td>[sudo] pkg install libmagic-dev</td> </tr> <tr> <td>Fedora</td> <td>[sudo] dnf install libmagic-dev</td> </tr> <tr> <td>OSX</td> <td>[sudo] brew install libmagic</td> </tr> <tr> <td>OpenSUSE</td> <td>[sudo] zypper install libmagic-dev</td> </tr> <tr> <td>Red Hat</td> <td>[sudo] yum install file-devel</td> </tr> <tr> <td>Source Code on GitHub</td> <td>L&lt;https://github.com/file/file&gt;</td> </tr> <tr> <td>Windows 32bit (older)</td> <td>L&lt;http://gnuwin32.sourceforge.net/packages/file.htm&gt;</td> </tr> <tr> <td>Windows 64bit (newer)</td> <td>L&lt;https://github.com/nscaife/file-windows&gt;</td> </tr>
+<tr> <td>Debian derivatives</td> <td>[sudo] apt-get install libmagic-dev</td> </tr> <tr> <td>FreeBSD</td> <td>[sudo] pkg install libmagic-dev</td> </tr> <tr> <td>Fedora</td> <td>[sudo] dnf install libmagic-dev</td> </tr> <tr> <td>OSX</td> <td>[sudo] brew install libmagic</td> </tr> <tr> <td>OpenSUSE</td> <td>[sudo] zypper install libmagic-dev</td> </tr> <tr> <td>Red Hat</td> <td>[sudo] yum install file-devel</td> </tr> <tr> <td>Source Code on GitHub</td> <td>https://github.com/file/file</td> </tr> <tr> <td>Windows 32bit (older)</td> <td>http://gnuwin32.sourceforge.net/packages/file.htm</td> </tr> <tr> <td>Windows 64bit (newer)</td> <td>https://github.com/nscaife/file-windows</td> </tr>
 </tbody>
 </table>
 

@@ -1,4 +1,6 @@
 Revision history for Filetype-Magic
 
 {{$NEXT}}
+
+0.0.5  2022-12-24T10:36:12-05:00
     - Migrate to fez ecosystem

@@ -1,28 +1,32 @@
+[![Actions Status](https://github.com/thundergnat/Filetype-Magic/actions/workflows/test.yml/badge.svg)](https://github.com/thundergnat/Filetype-Magic/actions)
+
 NAME Filetype::Magic
 ====================
 
-[![Build Status](https://travis-ci.org/thundergnat/Filetype-Magic.svg?branch=master)](https://travis-ci.org/thundergnat/Filetype-Magic)
+Try to guess a files type using the libmagic heuristic library.
 
 SYNOPSIS
 ========
 
-Try to guess a files type using the libmagic heuristic library.
-
 Object oriented mode:
 
-         use Filetype::Magic;
+```raku
+use Filetype::Magic;
 
-         my $magic = Magic.new;
+my $magic = Magic.new;
 
-         say $magic.type: '/path/to/file.name';
+say $magic.type: '/path/to/file.name';
+```
 
 Or use a convenience function.
 
 Subroutine interface:
 
-         use Filetype::Magic;
+```raku
+use Filetype::Magic;
 
-         say file-type '/path/to/file.name';
+say file-type '/path/to/file.name';
+```
 
 DESCRIPTION
 ===========
@@ -38,7 +42,7 @@ Windows: Needs libmagic.dll. Older 32bit packages are available on the authors s
 <th>Platform</th> <th>Install Method</th>
 </tr></thead>
 <tbody>
-<tr> <td>Debian derivatives</td> <td>[sudo] apt-get install libmagic-dev</td> </tr> <tr> <td>FreeBSD</td> <td>[sudo] pkg install libmagic-dev</td> </tr> <tr> <td>Fedora</td> <td>[sudo] dnf install libmagic-dev</td> </tr> <tr> <td>OSX</td> <td>[sudo] brew install libmagic</td> </tr> <tr> <td>OpenSUSE</td> <td>[sudo] zypper install libmagic-dev</td> </tr> <tr> <td>Red Hat</td> <td>[sudo] yum install file-devel</td> </tr> <tr> <td>Source Code on GitHub</td> <td>https://github.com/file/file</td> </tr> <tr> <td>Windows 32bit (older)</td> <td>http://gnuwin32.sourceforge.net/packages/file.htm</td> </tr> <tr> <td>Windows 64bit (newer)</td> <td>https://github.com/nscaife/file-windows</td> </tr>
+<tr> <td>Debian derivatives</td> <td>[sudo] apt-get install libmagic-dev</td> </tr> <tr> <td>FreeBSD</td> <td>[sudo] pkg install libmagic-dev</td> </tr> <tr> <td>Fedora</td> <td>[sudo] dnf install libmagic-dev</td> </tr> <tr> <td>OSX</td> <td>[sudo] brew install libmagic</td> </tr> <tr> <td>OpenSUSE</td> <td>[sudo] zypper install libmagic-dev</td> </tr> <tr> <td>Red Hat</td> <td>[sudo] yum install file-devel</td> </tr> <tr> <td>Source Code on GitHub</td> <td>L&lt;https://github.com/file/file&gt;</td> </tr> <tr> <td>Windows 32bit (older)</td> <td>L&lt;http://gnuwin32.sourceforge.net/packages/file.htm&gt;</td> </tr> <tr> <td>Windows 64bit (newer)</td> <td>L&lt;https://github.com/nscaife/file-windows&gt;</td> </tr>
 </tbody>
 </table>
 
@@ -65,13 +69,15 @@ FUNCTIONS - subroutine interface
 
 Useful for one-and-done, one-off use.
 
-    sub file-type( IO::Path $path, Bool :$mime )
-       or
-    sub file-type( Str $filename, Bool :$mime )
-       or
-    sub file-type( IO::Handle $handle, Bool :$mime )
-       or
-    sub file-type( Buf $buffer, Bool :$mime )
+```raku
+sub file-type( IO::Path $path, Bool :$mime )
+   # or
+sub file-type( Str $filename, Bool :$mime )
+   # or
+sub file-type( IO::Handle $handle, Bool :$mime )
+    # or
+sub file-type( Buf $buffer, Bool :$mime )
+```
 
 Try to detect file type of a given file path/name, or open file handle, or string buffer. Strings must be in a specific encoding for the C library, so to avoid encoding issues and to differentiate string buffers from string filenames, you must pass strings as a Buf encoded appropriately. Pass a keyword parameter `mime` to get a mime type result.
 
@@ -82,17 +88,21 @@ METHODS - object interface
 
 For when you would like a persistent instance.
 
-    method new  # Default database, default flags(none)
-       or
-    method new( :magicfile( '/path/to/magic/database.file' ) ) # Load a custom database
-       or
-    method new( :flags( MAGIC_SYMLINK +| MAGIC_MIME ) ) # Adjust search/reporting behavior
+```raku
+method new  # Default database, default flags(none)
+   # or
+method new( :magicfile( '/path/to/magic/database.file' ) ) # Load a custom database
+   # or
+method new( :flags( MAGIC_SYMLINK +| MAGIC_MIME ) ) # Adjust search/reporting behavior
+```
 
 Construct a new `Magic` instance with passed parameters if desired.
 
 --
 
-    method set-flags( int32 $flags = 0 )
+```raku
+method set-flags( int32 $flags = 0 )
+```
 
 Allows modification of parameters after initialization. Numeric-bitwise `or` any parameters together.
 
@@ -100,25 +110,31 @@ E.G. `$magic-instance.set-flags( MAGIC_SYMLINK +| MAGIC_MIME )`.
 
 --
 
-    method get-flags( )
+```raku
+method get-flags( )
+```
 
 Query which flags are set, returns the int32 value of the set flags.
 
 --
 
-    method type( IO::Path $path )
-       or
-    method type( Str $filename )
-       or
-    method type( IO::Handle $handle )
-       or
-    method type( Buf $buffer )
+```raku
+method type( IO::Path $path )
+   # or
+method type( Str $filename )
+   # or
+method type( IO::Handle $handle )
+   # or
+method type( Buf $buffer )
+```
 
 Try to detect file type of a given a file path/name, or open file handle, or string buffer. Strings must be in a specific encoding for the C library, so to avoid encoding issues and to differentiate string buffers from string filenames, you must pass strings as a Buf encoded appropriately.
 
 --
 
-    method version()
+```raku
+method version()
+```
 
 Return the current version. First digit is major version number, rest are minor.
 
@@ -126,25 +142,33 @@ Return the current version. First digit is major version number, rest are minor.
 
 There are several semi-private methods which mostly deal with initialization and setup. There is nothing preventing you from accessing them, they are publically available, but most people won't ever need to use them.
 
-    method magic-database( str $magic-database, int32 $flags )
+```raku
+method magic-database( str $magic-database, int32 $flags )
+```
 
 Location of the magic database file, pass Nil to load the default database. Pass any flags numeric-bitwise `or`ed together to adjust behavior. (See `method set-flags`)
 
 --
 
-    method magic-init( int32 $flags = 0 )
+```raku
+method magic-init( int32 $flags = 0 )
+```
 
 Initialize the file-magic instance, allocate a data structure to hold information and return a pointer to it. Pointer is stored in the class as $!magic-cookie.
 
 --
 
-    method magic-load( Pointer $magic-struct, str $database-list )
+```raku
+method magic-load( Pointer $magic-struct, str $database-list )
+```
 
 Load the database file(s) into the data structure.
 
 --
 
-    method magic-error()
+```raku
+method magic-error()
+```
 
 Pass any errors back up to the calling code.
 

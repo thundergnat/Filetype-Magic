@@ -1,5 +1,4 @@
-use v6;
-unit module Filetype::Magic:ver<0.0.4>:auth<github:thundergnat>;
+unit module Filetype::Magic:ver<0.0.5>:auth<zef:thundergnat>;
 
 use NativeCall;
 
@@ -124,30 +123,33 @@ sub file-type( \a, :$mime = False ) is export {
 =head1 NAME
 Filetype::Magic
 
-[![Build Status](https://travis-ci.org/thundergnat/Filetype-Magic.svg?branch=master)](https://travis-ci.org/thundergnat/Filetype-Magic)
+Try to guess a files type using the libmagic heuristic library.
+
 
 =head1 SYNOPSIS
 
-Try to guess a files type using the libmagic heuristic library.
-
 Object oriented mode:
 
-=begin code
-     use Filetype::Magic;
+=begin code :lang<raku>
 
-     my $magic = Magic.new;
+use Filetype::Magic;
 
-     say $magic.type: '/path/to/file.name';
+my $magic = Magic.new;
+
+say $magic.type: '/path/to/file.name';
+
 =end code
 
 Or use a convenience function.
 
 Subroutine interface:
 
-=begin code
-     use Filetype::Magic;
+=begin code :lang<raku>
 
-     say file-type '/path/to/file.name';
+use Filetype::Magic;
+
+say file-type '/path/to/file.name';
+
 =end code
 
 =head1 DESCRIPTION
@@ -176,9 +178,9 @@ Fedora                 |  [sudo] dnf install libmagic-dev
 OSX                    |  [sudo] brew install libmagic
 OpenSUSE               |  [sudo] zypper install libmagic-dev
 Red Hat                |  [sudo] yum install file-devel
-Source Code on GitHub  |  https://github.com/file/file
-Windows 32bit (older)  |  http://gnuwin32.sourceforge.net/packages/file.htm
-Windows 64bit (newer)  |  https://github.com/nscaife/file-windows
+Source Code on GitHub  |  L<https://github.com/file/file>
+Windows 32bit (older)  |  L<http://gnuwin32.sourceforge.net/packages/file.htm>
+Windows 64bit (newer)  |  L<https://github.com/nscaife/file-windows>
 =end table
 
 ----
@@ -223,15 +225,18 @@ method.
 
 Useful for one-and-done, one-off use.
 
-=begin code
+=begin code :lang<raku>
+
 sub file-type( IO::Path $path, Bool :$mime )
-   or
+   # or
 sub file-type( Str $filename, Bool :$mime )
-   or
+   # or
 sub file-type( IO::Handle $handle, Bool :$mime )
-   or
+    # or
 sub file-type( Buf $buffer, Bool :$mime )
+
 =end code
+
 Try to detect file type of a given file path/name, or open file handle, or
 string buffer. Strings must be in a specific encoding for the C library, so to
 avoid encoding issues and to differentiate string buffers from string filenames,
@@ -244,20 +249,26 @@ you must pass strings as a Buf encoded appropriately. Pass a keyword parameter
 
 For when you would like a persistent instance.
 
-=begin code
+=begin code :lang<raku>
+
 method new  # Default database, default flags(none)
-   or
+   # or
 method new( :magicfile( '/path/to/magic/database.file' ) ) # Load a custom database
-   or
+   # or
 method new( :flags( MAGIC_SYMLINK +| MAGIC_MIME ) ) # Adjust search/reporting behavior
+
 =end code
+
 Construct a new C<Magic> instance with passed parameters if desired.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method set-flags( int32 $flags = 0 )
+
 =end code
+
 Allows modification of parameters after initialization. Numeric-bitwise C<or>
 any parameters together.
 
@@ -265,22 +276,28 @@ E.G. C<$magic-instance.set-flags( MAGIC_SYMLINK +| MAGIC_MIME )>.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method get-flags( )
+
 =end code
+
 Query which flags are set, returns the int32 value of the set flags.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method type( IO::Path $path )
-   or
+   # or
 method type( Str $filename )
-   or
+   # or
 method type( IO::Handle $handle )
-   or
+   # or
 method type( Buf $buffer )
+
 =end code
+
 Try to detect file type of a given a file path/name, or open file handle, or
 string buffer. Strings must be in a specific encoding for the C library, so to
 avoid encoding issues and to differentiate string buffers from string filenames,
@@ -288,9 +305,12 @@ you must pass strings as a Buf encoded appropriately.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method version()
+
 =end code
+
 Return the current version. First digit is major version number, rest are minor.
 
 ----
@@ -299,34 +319,46 @@ There are several semi-private methods which mostly deal with initialization and
 setup. There is nothing preventing you from accessing them, they are publically
 available, but most people won't ever need to use them.
 
-=begin code
+=begin code :lang<raku>
+
 method magic-database( str $magic-database, int32 $flags )
+
 =end code
+
 Location of the magic database file, pass Nil to load the default database. Pass
 any flags numeric-bitwise C<or>ed together to adjust behavior. (See C<method
 set-flags>)
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method magic-init( int32 $flags = 0 )
+
 =end code
+
 Initialize the file-magic instance, allocate a data structure to hold
 information and return a pointer to it. Pointer is stored in the class as
 $!magic-cookie.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method magic-load( Pointer $magic-struct, str $database-list )
+
 =end code
+
 Load the database file(s) into the data structure.
 
 --
 
-=begin code
+=begin code :lang<raku>
+
 method magic-error()
+
 =end code
+
 Pass any errors back up to the calling code.
 
 --
